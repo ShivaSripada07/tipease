@@ -31,7 +31,7 @@ const saveUsers = async(req,res)=>
             role : req.body.role,
             username : req.body.username
         });
-        console.log(user);
+        //console.log(user);
         return res.status(201).json({msg:'success'});
     }
     catch(err)
@@ -41,10 +41,46 @@ const saveUsers = async(req,res)=>
 };
 const deleteUsers = async(req,res)=>
 {
+    try
+    {
+        const name = req.body.username;
+        const delUser = await userModel.findOneAndDelete({"username":name});
+        //console.log(delUser);
+        if(delUser)
+        {
+            res.status(200).json(delUser);
+        }
+        else
+        {
+            res.status(404).json({msg:'not found'});
+        }
+    }
+    catch(err)
+    {
+        res.status(500).json({msg:'error'});
+    }
         
 };
 const updateUsers = async(req,res)=>
 {
+    try
+    {
+        const newDetails = req.body;
+        const updatedDetail = await userModel.findOneAndUpdate({"username": newDetails.username}, newDetails, { new: true });
+        if(updatedDetail)
+        {
+            res.status(200).json(updatedDetail);
+        }
+        else
+        {
+            res.status(404).json({msg:'not found'});
+        }
+
+    }
+    catch(err)
+    {
+        res.status(500).json({msg:'error'});
+    }
             
 };
 

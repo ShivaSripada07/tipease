@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 //log file (info about all requests and response)
 const {logReq} = require('./LOG/log');
-app.use(logReq('/Users/shivasripada/Desktop/tipease/backend/LOG/logFile.txt'));
+app.use(logReq('/Users/shivasripada/Desktop/tipease/tipease/backend/LOG/logFile.txt'));
 
 
 //routes
@@ -32,7 +32,6 @@ app.use('/admin',adminRoute);
 app.use('/organisation',organisaionRoute);
 app.use('/serviceProvider',serviceProviderRoute);
 app.use('/user',userRoute);
-
 
 //app port connection
 app.listen(PORT,(err)=>

@@ -5,7 +5,7 @@ const {getUsers,saveUsers,updateUsers,deleteUsers} = require('../Controllers/use
 
 routes.get('/',getUsers);
 routes.post('/addUser',saveUsers);
-routes.patch('/editUser/:id',updateUsers);
-routes.delete('/deleteUser/:id',deleteUsers);
+routes.patch('/editUser',updateUsers);
+routes.delete('/deleteUser',deleteUsers);
 
 module.exports = routes ;

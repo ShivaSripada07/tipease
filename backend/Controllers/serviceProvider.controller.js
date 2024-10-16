@@ -1,4 +1,5 @@
 const serviceProviderModel = require('../Model/serviceProvider.model');
+const loginModel = require('../Model/login.model');
 /*
     name :{
         type : String,
@@ -82,6 +83,11 @@ const saveServiceProvider = async(req,res)=>
                 imageUrl : imageUrl,
                 bankDetails : bankDetails,
                 role : role
+            });
+            await loginModel.create({
+                email:email,
+                password : password,
+                role : "service provider"
             });
             newSP.then((ob)=>
             {

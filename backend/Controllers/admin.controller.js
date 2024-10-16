@@ -1,4 +1,5 @@
 const adminModel = require('../Model/admin.model');
+const loginModel = require('../Model/login.model');
 const getAdmin = async(req,res)=>
 {
     try
@@ -27,6 +28,11 @@ const saveAdmin = async(req,res)=>
             email:details.email,
             password : details.password,
             role:"admin"
+        });
+        await loginModel.create({
+            email:details.email,
+            password : details.password,
+            role : "admin"
         });
         if(adminDetails)
         {

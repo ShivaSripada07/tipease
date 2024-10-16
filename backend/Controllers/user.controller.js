@@ -1,4 +1,5 @@
 const userModel = require('../Model/user.model');
+const loginModel = require('../Model/login.model');
 const getUsers = async(req,res)=>
 {
     try
@@ -32,6 +33,11 @@ const saveUsers = async(req,res)=>
             username : req.body.username
         });
         //console.log(user);
+        await loginModel.create({
+            email:user.email,
+            password : user.password,
+            role : "user"
+        });
         return res.status(201).json({msg:'success'});
     }
     catch(err)

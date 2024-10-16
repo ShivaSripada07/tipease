@@ -1,4 +1,5 @@
 const organisationModel = require('../Model/organisation.model');
+const loginModel = require('../Model/login.model');
 /*
     email:
     {
@@ -81,6 +82,11 @@ const saveOrganisation = async(req,res)=>
                 location:location,
                 mobileNumber:mobileNumber,
                 imageUrl:imageUrl
+            });
+            await loginModel.create({
+                email:email,
+                password : password,
+                role : "organisation"
             });
             newRecord.then((response)=>
             {

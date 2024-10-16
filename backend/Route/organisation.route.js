@@ -4,8 +4,8 @@ const {getOrganisation,saveOrganisation,updateOrganisation,deleteOrganisation} =
 
 
 routes.get('/',getOrganisation);
-routes.post('/addUser',saveOrganisation);
-routes.patch('/editUser/:id',updateOrganisation);
-routes.delete('/deleteUser/:id',deleteOrganisation);
+routes.post('/add',saveOrganisation);
+routes.patch('/edit',updateOrganisation);
+routes.delete('/delete',deleteOrganisation);
 
 module.exports = routes ;

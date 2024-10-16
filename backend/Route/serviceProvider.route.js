@@ -3,8 +3,8 @@ const routes = express.Router();
 const {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider} = require('../Controllers/serviceProvider.controller');
 
 routes.get('/',getServiceProvider);
-routes.post('/addUser',saveServiceProvider);
-routes.patch('/editUser/:id',updateServiceProvider);
-routes.delete('/deleteUser/:id',deleteServiceProvider);
+routes.post('/add',saveServiceProvider);
+routes.patch('/edit',updateServiceProvider);
+routes.delete('/delete',deleteServiceProvider);
 
 module.exports = routes ;

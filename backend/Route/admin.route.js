@@ -4,7 +4,7 @@ const {getAdmin,saveAdmin,updateAdmin,deleteAdmin} = require('../Controllers/adm
 
 routes.get('/',getAdmin);
 routes.post('/addAdmin',saveAdmin);
-routes.patch('/updateAdmin/:id',updateAdmin);
-routes.delete('/deleteAdmin/:id',deleteAdmin);
+routes.patch('/updateAdmin',updateAdmin);
+routes.delete('/deleteAdmin',deleteAdmin);
 
 module.exports = routes ;

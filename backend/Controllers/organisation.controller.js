@@ -146,4 +146,24 @@ const updateOrganisation = async(req,res)=>
     }
                 
 };
-module.exports = {getOrganisation,saveOrganisation,deleteOrganisation,updateOrganisation};
+const getBySearch = async(req,res)=>
+{
+    try
+    {
+        const name = req.body.username;
+        const matchres = await organisationModel.find({ username: { $regex: '^' + name + '.*', $options: 'i' } });
+        if(matchres)
+        {
+            res.status(200).json(matchres);
+        }
+        else
+        {
+            res.status(404).json({msg:'no match found'});
+        }
+    }
+    catch(err)
+    {
+        res.status(500).json({msg:'error'});
+    }
+};
+module.exports = {getOrganisation,saveOrganisation,deleteOrganisation,updateOrganisation,getBySearch};

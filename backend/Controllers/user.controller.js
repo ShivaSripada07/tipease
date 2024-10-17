@@ -89,5 +89,24 @@ const updateUsers = async(req,res)=>
     }
             
 };
-
-module.exports = {getUsers,saveUsers,deleteUsers,updateUsers};
+const getBySearch = async(req,res)=>
+{
+    try
+    {
+        const name = req.body.username;
+        const matchres = await userModel.find({ username: { $regex: '^' + name + '.*', $options: 'i' } });
+        if(matchres)
+        {
+            res.status(200).json(matchres);
+        }
+        else
+        {
+            res.status(404).json({msg:'no match found'});
+        }
+    }
+    catch(err)
+    {
+        res.status(500).json({msg:'error'});
+    }
+};
+module.exports = {getUsers,saveUsers,deleteUsers,updateUsers,getBySearch};

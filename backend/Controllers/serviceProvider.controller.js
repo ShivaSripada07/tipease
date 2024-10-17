@@ -153,4 +153,25 @@ const updateServiceProvider = async(req,res)=>
     }
                 
 };
-module.exports = {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider};
+const getBySearch = async(req,res)=>
+{
+    try
+    {
+        const name = req.body.username;
+        const matchres = await serviceProviderModel.find({ username: { $regex: '^' + name + '.*', $options: 'i' } });
+        if(matchres)
+        {
+            res.status(200).json(matchres);
+        }
+        else
+        {
+            res.status(404).json({msg:'no match found'});
+        }
+    }
+    catch(err)
+    {
+        res.status(500).json({msg:'error'});
+    }
+
+};
+module.exports = {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider,getBySearch};

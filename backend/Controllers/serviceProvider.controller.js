@@ -87,7 +87,8 @@ const saveServiceProvider = async(req,res)=>
             await loginModel.create({
                 email:email,
                 password : password,
-                role : "service provider"
+                role : "service provider",
+                name:name
             });
             newSP.then((ob)=>
             {

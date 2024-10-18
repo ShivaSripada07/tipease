@@ -36,7 +36,8 @@ const saveUsers = async(req,res)=>
         await loginModel.create({
             email:user.email,
             password : user.password,
-            role : "user"
+            role : "user",
+            name:user.username
         });
         return res.status(201).json({msg:'success'});
     }

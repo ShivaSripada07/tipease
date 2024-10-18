@@ -1,0 +1,75 @@
+.header {
+    background-color: #1d2a35;
+    padding: 1rem 0;
+  }
+  
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-icon {
+    color: #05aa6d;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+  }
+  .menu-icon h1 {
+    color: white;
+  }
+  
+  .nav {
+    display: none;
+  }
+  
+  .nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+  }
+  
+  .nav a:hover {
+    color: #05aa6d;
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .signup-btn {
+    background-color: #05aa6d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  
+  .language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  
+  .globe-icon, .arrow-icon {
+    font-size: 1rem;
+    margin-left: 0.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .nav {
+      display: flex;
+    }
+  }

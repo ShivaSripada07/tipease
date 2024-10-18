@@ -86,7 +86,8 @@ const saveOrganisation = async(req,res)=>
             await loginModel.create({
                 email:email,
                 password : password,
-                role : "organisation"
+                role : "organisation",
+                name:organisationName
             });
             newRecord.then((response)=>
             {

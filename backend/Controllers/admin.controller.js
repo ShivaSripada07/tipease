@@ -32,7 +32,8 @@ const saveAdmin = async(req,res)=>
         await loginModel.create({
             email:details.email,
             password : details.password,
-            role : "admin"
+            role : "admin",
+            name:details.email.split('@')[0]
         });
         if(adminDetails)
         {

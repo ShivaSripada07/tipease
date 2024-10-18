@@ -18,6 +18,11 @@ const longinSchema = mongoose.Schema({
     {
         type : String,
         required : true
+    },
+    name:
+    {
+        type:String,
+        required:true
     }
 });
 const loginModel = mongoose.model("login",longinSchema);

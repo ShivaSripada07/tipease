@@ -1,0 +1,20 @@
+.partners {
+    background-color: white;
+    padding: 3rem 0;
+  }
+  
+  .partner-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .partner-logo {
+    margin: 1rem;
+  }
+  
+  .partner-logo img {
+    height: 7rem;
+    object-fit: contain;
+  }

@@ -8,9 +8,10 @@ const organisaionRoute = require('./Route/organisation.route');
 const serviceProviderRoute = require('./Route/serviceProvider.route');
 const userRoute = require('./Route/user.route');
 const loginRoute = require('./Route/login.route');
+const otpRoute = require('./Route/otp.route');
 
-const {checkUser} = require('./Middleware/checkUser.controller');
-const {verifyToken,isAdmin} = require('./Middleware/authentication');
+
+const {isAdmin} = require('./Middleware/authentication');
 
 //environment variables
 require("dotenv").config();
@@ -32,11 +33,13 @@ app.use(logReq('/Users/shivasripada/Desktop/minor/tipease/backend/LOG/logFile.tx
 
 
 //routes
-app.use('/admin',verifyToken,isAdmin,adminRoute);
-app.use('/organisation',verifyToken,organisaionRoute);
-app.use('/serviceProvider',verifyToken,serviceProviderRoute);
-app.use('/user',verifyToken,userRoute);
+app.use('/admin',isAdmin,adminRoute);
+app.use('/organisation',organisaionRoute);
+app.use('/serviceProvider',serviceProviderRoute);
+app.use('/user',userRoute);
 app.use('/login',loginRoute);
+app.use('/otp',otpRoute);
+
 
 //app port connection
 app.listen(PORT,(err)=>

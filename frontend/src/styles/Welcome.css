@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.Welcome-container {
+  font-family: 'Poppins', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  max-width: 100%;
+}
+
+.Welcome-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.Welcome-highlight {
+  color: #05aa6d;
+}
+
+.Welcome-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.Welcome-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #05aa6d;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.Welcome-button:hover {
+  background-color: #048f5b;
+}
+
+.Welcome-icon {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .Welcome-container {
+    padding: 2rem 1rem;
+  }
+
+  .Welcome-title {
+    font-size: 2rem;
+  }
+
+  .Welcome-description {
+    font-size: 1rem;
+  }
+}

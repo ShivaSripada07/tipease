@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.report-page {
+  font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  max-width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.highlight {
+  color: #05aa6d;
+}
+
+.description, .sub-description {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+}
+
+.option-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.option-button {
+  background-color: #05aa6d;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+  background-color: #048f5b;
+}
+
+@media (max-width: 768px) {
+  .options-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .option {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

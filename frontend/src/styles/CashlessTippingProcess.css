@@ -1,0 +1,72 @@
+.cashless-tipping-process {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  
+  .cashless-tipping-process h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .highlight {
+    color: #05aa6d;
+  }
+  
+  .description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .step-image {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .step-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step h3 {
+    font-size: 1.8rem;
+    color: #05aa6d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .step p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .process-steps {
+      flex-direction: column;
+    }
+  
+    .step {
+      margin-bottom: 2rem;
+    }
+  }

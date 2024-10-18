@@ -1,32 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Header.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Header = () => {
   return (
     <header className="header">
       <div className="container">
         <div className="logo">
-          <span className="menu-icon">☰</span>
-          <h1 style={{ color: 'white', fontSize: '1.6rem' }}>TipEase</h1>
+        <span className="menu-icon" style={{ fontSize: '2rem', marginTop: '-20px' }}>☰</span>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <h1 style={{ color: 'white', fontSize: '1.6rem' }}>TipEase</h1>
+          </Link>
         </div>
-        <nav className="nav">
-          <a href="#">How it works</a>
-          <a href="#">Who is it for</a>
-          <a href="#">Why TipEase</a>
-          <a href="#">Resources</a>
-          <a href="#">Contact Us</a>
+        <nav className="nav" style={ { marginTop : '-10px' , fontSize : '1.1rem'}}>
+          <Link to="/work">How it works</Link>
+          <Link to="/forwhat">Who is it for</Link>
+          <Link to="/why">Why TipEase</Link>
+          <Link to="/resource">Resources</Link>
+          <Link to="/contact">Contact Us</Link>
         </nav>
-        <div className="actions">
+        <div className="actions" style={{marginTop : '-7px'}}>
           <button className="signup-btn">Sign up for free!</button>
-          <a href="#" className="login-link">Login</a>
+          <Link to="/login" className="login-link">Login</Link>
           <div className="language-selector">
-            <span className="globe-icon">🌐</span>
-            <span className="arrow-icon">▼</span>
+            <span className="globe-icon">
+              <i className="bi bi-globe" style={{ color: 'white' }}></i>
+            </span>
+            <span className="arrow-icon" style={{ color: 'white' }}>▼</span>
           </div>
         </div>
       </div>
     </header>
   );
 };
-
 export default Header;

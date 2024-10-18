@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.ContactTemplate-container {
+  font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.ContactTemplate-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.ContactTemplate-highlight {
+  color: #05aa6d;
+}
+
+.ContactTemplate-description {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.ContactTemplate-content {
+  display: flex;
+  gap: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.ContactTemplate-info {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 2rem;
+}
+
+.ContactTemplate-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.ContactTemplate-text {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.ContactTemplate-company {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ContactTemplate-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ContactTemplate-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.ContactTemplate-social svg {
+  cursor: pointer;
+  color: #05aa6d;
+}
+
+.ContactTemplate-form {
+  flex: 2;
+  padding: 2rem;
+}
+
+.ContactTemplate-formRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ContactTemplate-formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ContactTemplate-formGroup label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.ContactTemplate-formGroup input,
+.ContactTemplate-formGroup select,
+.ContactTemplate-formGroup textarea {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.ContactTemplate-radioGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.ContactTemplate-radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 400;
+}
+
+.ContactTemplate-submit {
+  background-color: #05aa6d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ContactTemplate-submit:hover {
+  background-color: #048f5b;
+}
+
+@media (max-width: 768px) {
+  .ContactTemplate-content {
+    flex-direction: column;
+  }
+
+  .ContactTemplate-formRow {
+    flex-direction: column;
+  }
+}

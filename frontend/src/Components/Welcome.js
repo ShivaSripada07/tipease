@@ -6,11 +6,11 @@ const Welcome = () => {
   return (
     <div className="Welcome-container">
       <h1 className="Welcome-title">
-        Ready to <span className="Welcome-highlight">join</span> EasyTip?
+        Ready to <span className="Welcome-highlight">join</span> TipEase?
       </h1>
       <p className="Welcome-description">
-        EasyTip's innovative digital tipping platform supports hospitality and services business owners, staff
-        and customers across the UK by providing a seamless cashless tipping experience. Tell us more
+        TipEase's innovative digital tipping platform supports hospitality and services business owners, staff
+        and customers across the India by providing a seamless cashless tipping experience. Tell us more
         about your business in today!
       </p>
       <button className="Welcome-button">

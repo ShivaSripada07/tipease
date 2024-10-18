@@ -10,7 +10,7 @@ const ForWhat = () => {
           Best <span className="highlight">digital tipping solution</span> for any type of business
         </h1>
         <p className="description">
-          EasyTip helps all hospitality and service businesses collect, distribute and track digital tips with ease.
+          TipEase helps all hospitality and service businesses collect, distribute and track digital tips with ease.
         </p>
         <button className="cta-button" style={{ fontSize: '1.1rem', fontWeight: '600' , width : '13.6rem' }}>
           Sign up for free! <ArrowRight className="icon" size={20} />

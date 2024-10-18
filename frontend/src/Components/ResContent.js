@@ -6,7 +6,7 @@ const ResContent = () => {
     <div className="report-page">
       <h1 className="title" style={{color:'#333'}}>How do I <span className="highlight">report</span> my cashless tips?</h1>
       <p className="description">
-        EasyTip is a platform to collect tips so we are not at liberty to advise on individual tax cases
+        TipEase is a platform to collect tips so we are not at liberty to advise on individual tax cases
         but we can help direct you to the right information.
       </p>
       <p className="sub-description">

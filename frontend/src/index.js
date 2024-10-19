@@ -12,6 +12,7 @@ import Resource from './Components/Resource';
 import Contact from './Components/Contact';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
+import Verification from './Components/Verification';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -26,6 +27,7 @@ root.render(
       <Route path="/contact" element={<Contact/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path = '/login' element={<Login/>}/>
+      <Route path = '/verify' element = {<Verification/>}/>
     </Routes>
   </BrowserRouter>
 

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { User } from 'lucide-react';
 import '../styles/Signup.css';
+import { useNavigate } from 'react-router-dom';
 function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,8 +23,8 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
     //backend
+    navigate('/verify',{state:{data:formData}});
   };
 
   return (
@@ -36,7 +38,7 @@ function Signup() {
             Sign up for an account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-9 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">
@@ -102,13 +104,28 @@ function Signup() {
               />
             </div>
             <div>
-              <label htmlFor="mobile-number" className="sr-only">
+              <label htmlFor="mobilenumbe" className="sr-only">
                 Mobile Number
               </label>
+              <input 
+                type="tel" 
+                id="mobileNumber" 
+                name="mobileNumber" 
+                required
+                placeholder="Mobile Number"
+                value={formData.mobileNumber}
+                onChange={handleInputChange}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
+              />
+          </div>
+            <div>
+              <label htmlFor="image-url" className="sr-only">
+                Image URL
+              </label>
               <input
-                id="mobile-number"
-                name="mobileNumber"
-                type="tel"
+                id="image-url"
+                name="imageurl"
+                type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
                 placeholder="Image URL"
@@ -116,24 +133,7 @@ function Signup() {
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-          <div>
-              <label htmlFor="imageurl" className="sr-only">
-                Image URL
-              </label>
-              <input
-                id="imageurl"
-                name="imageurl"
-                type="text"
-                autoComplete="tel"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
-                placeholder="Mobile Number"
-                value={formData.mobileNumber}
-                onChange={handleInputChange}
-              />
             </div>
-
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input

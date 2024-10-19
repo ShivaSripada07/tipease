@@ -5,7 +5,7 @@ const {verifyToken} = require('../Middleware/authentication');
 
 
 
-routes.get('/',verifyToken,getOrganisation);
+routes.get('/',getOrganisation);
 routes.get('/search',verifyToken,getBySearch);
 routes.post('/add',saveOrganisation);
 routes.patch('/edit',verifyToken,updateOrganisation);

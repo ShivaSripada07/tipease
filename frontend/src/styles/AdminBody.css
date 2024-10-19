@@ -1,0 +1,149 @@
+.admin-body {
+    padding: 2rem;
+    background-color: #f0f2f5;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #05aa6d;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .org-image,
+  .provider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover .org-image,
+  .card:hover .provider-image {
+    transform: scale(1.05);
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .org-info,
+  .provider-info {
+    flex-grow: 1;
+  }
+  
+  .org-name,
+  .provider-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem;
+    color: #05aa6d;
+  }
+  
+  .org-location,
+  .provider-mobile {
+    color: #666;
+    margin: 0 0 1rem;
+    font-size: 1rem;
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+  
+  .action-btn {
+    background: none;
+    border: 2px solid;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    flex: 1;
+    margin: 0 0.5rem;
+  }
+  
+  .edit-btn {
+    color: #05aa6d;
+    border-color: #05aa6d;
+  }
+  
+  .edit-btn:hover {
+    background-color: #05aa6d;
+    color: white;
+  }
+  
+  .delete-btn {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .delete-btn:hover {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .service-providers-section {
+    margin-top: 3rem;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-body {
+      padding: 1rem;
+    }
+  
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .card {
+    animation: fadeIn 0.5s ease-out;
+  }

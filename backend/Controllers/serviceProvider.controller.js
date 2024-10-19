@@ -65,6 +65,19 @@ const getServiceProvider = async(req,res)=>
         res,status(500).json({msg:'unable to fetch'});
     }
 };
+const getByOrgId = async (req, res) => {
+    try {
+        const allServiceProviders = await serviceProviderModel.find({ organisationId: req.body.organisationId });
+        if (allServiceProviders.length > 0) {
+            res.status(200).json(allServiceProviders);
+        } else {
+            res.status(404).json({ msg: 'No service providers found for this organization.' });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: 'Unable to fetch service providers.' });
+    }
+};
+
 const saveServiceProvider = async(req,res)=>
 {
     try
@@ -175,4 +188,4 @@ const getBySearch = async(req,res)=>
     }
 
 };
-module.exports = {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider,getBySearch};
+module.exports = {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider,getBySearch , getByOrgId};

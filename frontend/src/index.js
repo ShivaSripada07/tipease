@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import HomeComponent from './HomeComponent';
@@ -15,25 +15,36 @@ import Login from './Components/Login';
 import Verification from './Components/Verification';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminDashboard from './Components/AdminDashboard';
+
+const App = () => {
+  const location = useLocation();
+
+  return (
+    <>
+      {location.pathname !== '/admin' && <Header />}
+      <Routes>
+        <Route path="/" exact index element={<HomeComponent />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/forwhat" element={<What />} />
+        <Route path="/why" element={<Why />} />
+        <Route path="/resource" element={<Resource />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify" element={<Verification />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Routes>
+      <ToastContainer />
+    </>
+  );
+};
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <BrowserRouter>
-    <Header />
-    <Routes>
-      <Route path="/" exact element={<HomeComponent />} />
-      <Route path="/work" element={<Work/>} />
-      <Route path="/forwhat" element={<What/>} />
-      <Route path="/why" element={<Why/>}/>
-      <Route path="/resource" element={<Resource/>}/>
-      <Route path="/contact" element={<Contact/>}/>
-      <Route path='/signup' element={<Signup/>}/>
-      <Route path = '/login' element={<Login/>}/>
-      <Route path = '/verify' element = {<Verification/>}/>
-    </Routes>
-    <ToastContainer />
+    <App />
   </BrowserRouter>
-
 );
 
 // If you want to start measuring performance in your app, pass a function

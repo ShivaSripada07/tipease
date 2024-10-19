@@ -19,31 +19,26 @@ const getUsers = async(req,res)=>
         res.send("error occured while fetching data...");
     }
 };
-const saveUsers = async(req,res)=>
-{
-    try
-    {
-       // console.log(req.body);
+const saveUsers = async(req, res) => {
+    try {
         const user = await userModel.create({
-            email : req.body.email,
-            password : req.body.password,
-            mobileNumber : req.body.mobileNumber,
-            imageUrl : req.body.imageUrl,
-            role : req.body.role,
-            username : req.body.username
+            email: req.body.email,
+            password: req.body.password,
+            mobileNumber: req.body.mobileNumber,
+            imageUrl: req.body.imageUrl,
+            role: req.body.role,
+            username: req.body.username
         });
-        //console.log(user);
         await loginModel.create({
-            email:user.email,
-            password : user.password,
-            role : "user",
-            name:user.username
+            email: user.email,
+            password: user.password,
+            role: "user",
+            name: user.username
         });
-        return res.status(201).json({msg:'success'});
-    }
-    catch(err)
-    {
-        res.status(500).send("error");
+        return res.status(201).json({ msg: 'User and login created successfully' });
+    } catch (err) {
+        console.error("Error creating user or login:", err);
+        return res.status(500).json({ msg: 'Error creating user or login', error: err.message });
     }
 };
 const deleteUsers = async(req,res)=>

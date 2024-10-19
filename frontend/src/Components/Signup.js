@@ -17,6 +17,7 @@ function Signup() {
     id: '',
     location: '',
     bankDetails: '',
+    organisationId:''
   });
   const [previewUrl, setPreviewUrl] = useState('');
 
@@ -153,8 +154,6 @@ function Signup() {
               />
             </div>
           </div>
-
-          {/* Image Upload Section */}
           <div className="space-y-4">
             <label htmlFor="file-upload" className="block text-sm font-medium text-gray-700 mb-1">
               Upload Profile Image
@@ -183,8 +182,6 @@ function Signup() {
               </div>
             </div>
           </div>
-
-          {/* Image Preview */}
           {previewUrl && (
             <div className="mt-4">
               <h3 className="text-lg font-semibold mb-2">Image Preview</h3>
@@ -278,6 +275,23 @@ function Signup() {
               />
             </div>
           )}
+                    {formData.role === 'serviceProvider' && (
+            <div>
+              <label htmlFor="organisation-id" className="sr-only">
+                Organisation Id
+              </label>
+              <input
+                id="organisation-id"
+                name="organisationid"
+                type="tel"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
+                placeholder="Organisation Id"
+                value={formData.organisationId}
+                onChange={handleInputChange}
+              />
+            </div>
+          )}
 
           {formData.role === 'serviceProvider' && (
             <div>
@@ -296,6 +310,7 @@ function Signup() {
               />
             </div>
           )}
+          
 
           <div>
             <button

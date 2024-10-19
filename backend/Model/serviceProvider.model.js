@@ -44,6 +44,11 @@ const serverProviderSchema = mongoose.Schema({
     {
         type : String , 
         required : true
+    },
+    organisationId :
+    {
+        type:Number,
+        required : true
     }
 });
 

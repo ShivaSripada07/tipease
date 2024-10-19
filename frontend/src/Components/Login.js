@@ -3,15 +3,16 @@ import { User } from 'lucide-react';
 import '../styles/Login.css';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 function Login() {
+  const navigate = useNavigate();
   const location = useLocation();
   const recData = location.state?.data;
   useEffect(() => {
-    if (recData?.msg === "from verification") 
-    {
       toast.success("Verification successful");
-    }
   }, [recData]);
   const [formData, setFormData] = useState({
     email: '',
@@ -25,10 +26,56 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-   //backend
-  };
+  
+    axios.post('http://localhost:4000/login', {
+      email: formData.email,
+      password: formData.password
+    })
+    .then(response => {
+      if (response && response.data) {
+        console.log(response.data);
+        const { token, name, email, role } = response.data;
 
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", name);
+        localStorage.setItem("email", email);
+        localStorage.setItem("role", role);
+        
+        const roleActions = {
+            user: () => {
+                //console.log("Logged in as user");
+                navigate("/userDashboard");
+                toast.success(`Welcome, ${name}`);
+            },
+            admin: () => {
+                //console.log("Logged in as admin");
+                navigate("/adminDashboard");
+                toast.success(`Welcome, ${name}`);
+            },
+            organisation: () => {
+                //console.log("Logged in as organisation");
+                navigate("/organisationDashboard");
+                toast.success(`Welcome, ${name}`);
+            },
+            serviceProvider: () => {
+              //console.log("Logged in as service provider");
+              navigate("/serviceproviderDashboard");
+              toast.success(`Welcome, ${name}`);
+            },
+            default: () => {
+                console.log("Unknown role");
+                toast.error("Unknown role. Please contact support.");
+                navigate("/");
+            }
+        };  
+        (roleActions[role] || roleActions.default)();
+      }
+    })
+    .catch(err => {
+      toast.error('Login failed! Please check your credentials.');
+    });
+  };
+  
   return (
     <div className="min-h-screen bg-tipease-dark flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl">

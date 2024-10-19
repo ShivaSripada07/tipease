@@ -1,0 +1,74 @@
+.admin-navbar {
+    background-color: #1d2a35;
+    color: white;
+    padding: 1rem;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link:hover {
+    background-color: #05aa6d;
+  }
+  
+  .nav-link i {
+    margin-right: 0.5rem;
+  }
+  
+  .welcome-message {
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .nav-links {
+      margin-top: 1rem;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .nav-link {
+      padding: 0.5rem 0;
+    }
+  
+    .welcome-message {
+      margin-top: 1rem;
+    }
+  }

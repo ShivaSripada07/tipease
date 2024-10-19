@@ -10,7 +10,6 @@ const businessTypes = [
   { title: 'Events & Entertainment', image: 'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' },
   { title: 'Partnerships', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' },
 ];
-
 const Business = () => {
   return (
     <div className="business-container">

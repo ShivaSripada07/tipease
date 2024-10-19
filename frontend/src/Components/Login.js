@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { User } from 'lucide-react';
 import '../styles/Login.css';
+import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Login() {
+  const location = useLocation();
+  const recData = location.state?.data;
+  useEffect(() => {
+    if (recData?.msg === "from verification") 
+    {
+      toast.success("Verification successful");
+    }
+  }, [recData]);
   const [formData, setFormData] = useState({
     email: '',
     password: '',

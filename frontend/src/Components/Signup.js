@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { User } from 'lucide-react';
+import { User, Upload } from 'lucide-react';
 import '../styles/Signup.css';
 import { useNavigate } from 'react-router-dom';
+
 function Signup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,24 +12,42 @@ function Signup() {
     confirmPassword: '',
     mobileNumber: '',
     imageurl:'',
+    imageFile: null,
     role: 'user',
     id: '',
     location: '',
     bankDetails: '',
   });
+  const [previewUrl, setPreviewUrl] = useState('');
+
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, files } = e.target;
+    if (type === 'file' && files && files[0]) {
+      const file = files[0];
+      setFormData((prev) => ({ ...prev, imageFile: file }));
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //backend
-    navigate('/verify',{state:{data:formData}});
+    const dataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'imageFile' && value instanceof File) {
+        dataToSend.append('image', value);
+      } else if (typeof value === 'string') {
+        dataToSend.append(key, value);
+      }
+    });
+
+    console.log('Form submitted:', dataToSend);
+    navigate('/verify', { state: { data: formData } });
   };
 
   return (
-    <div className="min-h-screen bg-tipease-dark flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-tipease-dark flex items-center justify-center py-12 px-6 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-2xl">
         <div>
           <h1 className="text-center text-4xl font-extrabold text-tipease-primary">
@@ -104,7 +123,7 @@ function Signup() {
               />
             </div>
             <div>
-              <label htmlFor="mobilenumbe" className="sr-only">
+              <label htmlFor="mobileNumber" className="sr-only">
                 Mobile Number
               </label>
               <input 
@@ -117,7 +136,7 @@ function Signup() {
                 onChange={handleInputChange}
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
               />
-          </div>
+            </div>
             <div>
               <label htmlFor="image-url" className="sr-only">
                 Image URL
@@ -133,7 +152,52 @@ function Signup() {
                 onChange={handleInputChange}
               />
             </div>
+          </div>
+
+          {/* Image Upload Section */}
+          <div className="space-y-4">
+            <label htmlFor="file-upload" className="block text-sm font-medium text-gray-700 mb-1">
+              Upload Profile Image
+            </label>
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div className="space-y-1 text-center">
+                <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                <div className="flex text-sm text-gray-600">
+                  <label
+                    htmlFor="file-upload"
+                    className="relative cursor-pointer bg-white rounded-md font-medium text-tipease-primary hover:text-tipease-primary-dark focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-tipease-primary"
+                  >
+                    <span>Upload a file</span>
+                    <input
+                      id="file-upload"
+                      name="imageFile"
+                      type="file"
+                      className="sr-only"
+                      accept="image/jpeg,image/png,image/gif"
+                      onChange={handleInputChange}
+                    />
+                  </label>
+                  <p className="pl-1">or drag and drop</p>
+                </div>
+                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              </div>
             </div>
+          </div>
+
+          {/* Image Preview */}
+          {previewUrl && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Image Preview</h3>
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-tipease-primary">
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          )}
+
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input

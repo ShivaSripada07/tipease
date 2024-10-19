@@ -1,7 +1,11 @@
 //express 
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
+
+// Enable CORS for all routes
+app.use(cors());
 //path routes for roles
 const adminRoute = require('./Route/admin.route');
 const organisaionRoute = require('./Route/organisation.route');

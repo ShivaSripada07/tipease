@@ -71,7 +71,7 @@ const generateOTP = async (req, res) => {
         `;                          
         const subject = "Your TipEase OTP Code";
         await sendMail(email, subject, html);
-        res.status(200).json({ message: 'OTP sent successfully to your email.' });
+        res.status(200).json({otp:otp});
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Failed to send OTP.' });

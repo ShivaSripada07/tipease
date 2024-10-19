@@ -13,6 +13,8 @@ import Contact from './Components/Contact';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Verification from './Components/Verification';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -29,6 +31,7 @@ root.render(
       <Route path = '/login' element={<Login/>}/>
       <Route path = '/verify' element = {<Verification/>}/>
     </Routes>
+    <ToastContainer />
   </BrowserRouter>
 
 );

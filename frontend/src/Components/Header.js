@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Header.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="header">
       <div className="container">
@@ -21,7 +22,7 @@ const Header = () => {
           <Link to="/contact">Contact Us</Link>
         </nav>
         <div className="actions" style={{marginTop : '-7px'}}>
-          <button className="signup-btn">Sign up for free!</button>
+          <button className="signup-btn" onClick={() => navigate('/signup')}>Sign up for free!</button>
           <Link to="/login" className="login-link">Login</Link>
           <div className="language-selector">
             <span className="globe-icon">

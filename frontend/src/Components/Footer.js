@@ -9,9 +9,12 @@ import '../Images/mastercard-seeklogo.com 1.webp';
 import '../Images/visa (1) 1.webp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -19,7 +22,7 @@ const Footer = () => {
           <h3>TipEase</h3>
           <p style={{color:'white'}}>The leading cashless tipping platform</p>
           <p style={{color:'white'}}>We help hospitality and service businesses collect and distribute cashless tips quickly and admin free. Our cashless tipping platform is simple and hassle-free for guests, staff and managers!</p>
-          <button className="sign-up-btn">Sign up now!</button>
+          <button className="sign-up-btn" onClick={() => navigate('/signup')}>Sign up now!</button>
         </div>
         <div className="footer-right">
           <div className="footer-column">

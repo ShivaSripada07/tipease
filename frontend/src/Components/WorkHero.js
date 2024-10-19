@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/WorkHero.css';
 import '../Images/download-1.webp';
-
+import { useNavigate } from 'react-router-dom';
 const WorkHero = () => {
+  const navigate = useNavigate();
   return (
     <section className="work-hero">
       <div className="work-hero-content">
@@ -13,7 +14,7 @@ const WorkHero = () => {
           <p>
             TipEase makes tipping discreet and effortless! Customers scan, tip and pay in 3 seconds, no apps required! Staff earn more and receive tips instantly.
           </p>
-          <button className="work-cta-btn">Sign up for free!</button>
+          <button className="work-cta-btn" onClick={() => navigate('/signup')} >Sign up for free!</button>
         </div>
         <div className="work-hero-image">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Happy staff member" />

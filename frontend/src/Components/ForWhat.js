@@ -1,8 +1,12 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import '../styles/ForWhat.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const ForWhat = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="landing-page">
       <div className="content">
@@ -12,7 +16,7 @@ const ForWhat = () => {
         <p className="description">
           TipEase helps all hospitality and service businesses collect, distribute and track digital tips with ease.
         </p>
-        <button className="cta-button" style={{ fontSize: '1.1rem', fontWeight: '600' , width : '13.6rem' }}>
+        <button className="cta-button" style={{ fontSize: '1.1rem', fontWeight: '600' , width : '13.6rem' }}   onClick={() => navigate('/signup')}>
           Sign up for free! <ArrowRight className="icon" size={20} />
         </button>
       </div>

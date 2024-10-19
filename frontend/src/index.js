@@ -10,8 +10,8 @@ import What from './Components/What';
 import Why from './Components/Why';
 import Resource from './Components/Resource';
 import Contact from './Components/Contact';
-
-
+import Signup from './Components/Signup';
+import Login from './Components/Login';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -24,6 +24,8 @@ root.render(
       <Route path="/why" element={<Why/>}/>
       <Route path="/resource" element={<Resource/>}/>
       <Route path="/contact" element={<Contact/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path = '/login' element={<Login/>}/>
     </Routes>
   </BrowserRouter>
 

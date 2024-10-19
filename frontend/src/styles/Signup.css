@@ -1,0 +1,43 @@
+/* Signup-specific styles */
+.signup-page {
+    --color-tipease-primary: #05aa6d;
+    --color-tipease-primary-dark: #048c59;
+    --color-tipease-dark: #1d2a35;
+  }
+  
+  .signup-page body {
+    background-color: var(--color-tipease-dark);
+  }
+  
+  .signup-page .bg-tipease-primary {
+    background-color: var(--color-tipease-primary);
+  }
+  
+  .signup-page .bg-tipease-primary-dark {
+    background-color: var(--color-tipease-primary-dark);
+  }
+  
+  .signup-page .bg-tipease-dark {
+    background-color: var(--color-tipease-dark);
+  }
+  
+  .signup-page .text-tipease-primary {
+    color: var(--color-tipease-primary);
+  }
+  
+  .signup-page .focus\:ring-tipease-primary:focus {
+    --tw-ring-color: var(--color-tipease-primary);
+  }
+  
+  .signup-page .focus\:border-tipease-primary:focus {
+    border-color: var(--color-tipease-primary);
+  }
+  
+  .signup-page .hover\:bg-tipease-primary-dark:hover {
+    background-color: var(--color-tipease-primary-dark);
+  }
+  
+  .signup-page .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  

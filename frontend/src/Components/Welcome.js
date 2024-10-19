@@ -1,8 +1,11 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import '../styles/Welcome.css'
+import { useNavigate } from 'react-router-dom';
+
 
 const Welcome = () => {
+  const navigate = useNavigate();
   return (
     <div className="Welcome-container">
       <h1 className="Welcome-title">
@@ -13,7 +16,7 @@ const Welcome = () => {
         and customers across the India by providing a seamless cashless tipping experience. Tell us more
         about your business in today!
       </p>
-      <button className="Welcome-button">
+      <button className="Welcome-button" onClick={() => navigate('/signup')}>
         Sign up for free! <ArrowRight className="Welcome-icon" size={20} />
       </button>
     </div>

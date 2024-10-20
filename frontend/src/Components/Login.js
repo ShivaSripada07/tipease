@@ -12,8 +12,11 @@ function Login() {
   const location = useLocation();
   const recData = location.state?.data;
   useEffect(() => {
+    if (recData) {
       toast.success("Verification successful");
+    }
   }, [recData]);
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -49,7 +52,7 @@ function Login() {
             },
             admin: () => {
                 //console.log("Logged in as admin");
-                navigate("/adminDashboard");
+                navigate("/admin");
                 toast.success(`Welcome, ${name}`);
             },
             organisation: () => {

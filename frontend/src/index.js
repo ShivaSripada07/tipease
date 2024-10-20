@@ -16,13 +16,18 @@ import Verification from './Components/Verification';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminDashboard from './Components/AdminDashboard';
+import AdminEditComponent from './Components/AdminEditComponent';
+import ServiceEditComponent from './Components/ServiceEditComponent';
+import AddOrganizationComponent from './Components/AddOrganisationComponent';
+import Dashboard from './Components/Dashboard';
+import Profile from './Components/Profile';
 
 const App = () => {
   const location = useLocation();
-
+  const hideHeaderPaths = ['/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile'];
   return (
     <>
-      {location.pathname !== '/admin' && <Header />}
+      {!hideHeaderPaths.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" exact index element={<HomeComponent />} />
         <Route path="/work" element={<Work />} />
@@ -34,6 +39,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/verify" element={<Verification />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/edit" element = {<AdminEditComponent/>}/>
+        <Route path="/admin/serviceEdit" element = {<ServiceEditComponent/>}/>
+        <Route path="/admin/addOrg" element = {<AddOrganizationComponent/>}/>
+        <Route path="/admin/dashboard" element = {<Dashboard/>}/>
+        <Route path="/admin/profile" element = {<Profile/>}/>
       </Routes>
       <ToastContainer />
     </>

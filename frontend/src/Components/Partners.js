@@ -21,7 +21,7 @@ const Partners = () => {
         <h1 style={{textAlign:'center',fontSize:'2rem'}}>Trusted by leading hospitality businesses</h1>
       </div>
       <div className="container">
-        <div className="partner-logos">
+        <div className="partner-logos" style={{marginLeft:'18%'}}>
           {partners.map((partner, index) => (
             <div key={index} className="partner-logo">
               <img src={partner.logo} alt={partner.name} />

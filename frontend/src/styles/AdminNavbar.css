@@ -41,7 +41,9 @@
   }
   
   .nav-link:hover {
-    background-color: #05aa6d;
+    background-color: transparent;
+    color: #05aa6d;
+    border-radius: 14px;
   }
   
   .nav-link i {
@@ -49,7 +51,7 @@
   }
   
   .welcome-message {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
   
   @media (max-width: 768px) {

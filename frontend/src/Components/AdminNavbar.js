@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/AdminNavbar.css'
+import '../styles/AdminNavbar.css';
+import { useNavigate } from 'react-router-dom';
 
 const AdminNavbar = () => {
   const name = localStorage.getItem("name") || "Admin";
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
   return (
     <nav className="admin-navbar">
       <div className="container">
@@ -13,15 +19,15 @@ const AdminNavbar = () => {
         </Link>
         <ul className="nav-links">
           <li>
-            <Link to="/admin" className="nav-link">
+            <Link to="/admin/dashboard" className="nav-link">
               <i className="bi bi-house-door"></i>
               Dashboard
             </Link>
           </li>
           <li>
-            <Link to="/admin/organizations" className="nav-link">
+            <Link to="/admin/addOrg" className="nav-link">
               <i className="bi bi-building"></i>
-              Manage Organisations
+              Add Organisations
             </Link>
           </li>
           <li>
@@ -31,7 +37,7 @@ const AdminNavbar = () => {
             </Link>
           </li>
           <li>
-            <button className="nav-link">
+            <button className="nav-link" onClick={handleLogout}>
               <i className="bi bi-box-arrow-right"></i>
               Logout
             </button>

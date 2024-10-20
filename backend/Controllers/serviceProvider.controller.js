@@ -151,7 +151,7 @@ const updateServiceProvider = async(req,res)=>
     {
         const updatedServiceProviderDetails = req.body;
         //console.log(updatedServiceProviderDetails);
-        const updatedDetails = await serviceProviderModel.findOneAndUpdate({name:updatedServiceProviderDetails.name},updatedServiceProviderDetails);
+        const updatedDetails = await serviceProviderModel.findOneAndUpdate({serviceId:updatedServiceProviderDetails.serviceId},updatedServiceProviderDetails);
         if(updatedDetails)
         {
             res.status(200).json({msg:'success'});

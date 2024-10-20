@@ -6,9 +6,9 @@ const {verifyToken} = require('../Middleware/authentication');
 
 routes.get('/',getServiceProvider);
 routes.get('/search',verifyToken,getBySearch);
-routes.post('/add',saveServiceProvider);
+routes.post('/add',verifyToken,saveServiceProvider);
 routes.patch('/edit',verifyToken,updateServiceProvider);
 routes.delete('/delete',verifyToken,deleteServiceProvider);
-routes.post('/byOrg',getByOrgId);
+routes.post('/byOrg',verifyToken,getByOrgId);
 
 module.exports = routes ;

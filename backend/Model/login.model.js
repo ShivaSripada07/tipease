@@ -23,6 +23,11 @@ const longinSchema = mongoose.Schema({
     {
         type:String,
         required:true
+    },
+    id :
+    {
+        type : Number,
+        required : false
     }
 });
 const loginModel = mongoose.model("login",longinSchema);

@@ -46,7 +46,7 @@ const AdminBody = () => {
     fetchServiceProviders(org.organisationId);
   };
   const handleEdit = (org) =>{
-      navigate('./edit',{state:{data:org}});
+      navigate('./edit',{state:{data:org , reloc:'/org'}});
   };
   const handleDelete = async (org) => {
     const confirmDelete = window.confirm(`Are you sure you want to delete ${org.organisationName}?`);
@@ -77,7 +77,7 @@ const AdminBody = () => {
   };
   const handleServiceEdit = (provider)=>
   {
-        navigate('./serviceEdit',{state:{data:provider}});
+    navigate('/admin/serviceEdit', { state: { data: provider, reloc: '/org' } });
   };
   const handleServiceDelete = async(provider)=>
   {

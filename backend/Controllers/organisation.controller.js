@@ -87,7 +87,8 @@ const saveOrganisation = async(req,res)=>
                 email:email,
                 password : password,
                 role : "organisation",
-                name:organisationName
+                name:organisationName,
+                id:organisationId
             });
             newRecord.then((response)=>
             {
@@ -167,4 +168,18 @@ const getBySearch = async(req,res)=>
         res.status(500).json({msg:'error'});
     }
 };
-module.exports = {getOrganisation,saveOrganisation,deleteOrganisation,updateOrganisation,getBySearch};
+const getOrgId = async (req, res) => {
+    try {
+      const organisationId = req.body.id; 
+      const response = await organisationModel.find({ organisationId });  
+      if (response.length > 0) {
+        res.status(200).json(response);
+      } else {
+        res.status(404).json({ msg: 'Organisation not found' });
+      }
+    } catch (err) {
+      res.status(500).json({ msg: 'Error occurred during fetching', error: err.message });
+    }
+  };
+  
+module.exports = {getOrganisation,saveOrganisation,deleteOrganisation,updateOrganisation,getBySearch,getOrgId};

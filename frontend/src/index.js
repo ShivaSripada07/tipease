@@ -21,10 +21,13 @@ import ServiceEditComponent from './Components/ServiceEditComponent';
 import AddOrganizationComponent from './Components/AddOrganisationComponent';
 import Dashboard from './Components/Dashboard';
 import Profile from './Components/Profile';
-
+import Organisation from './Components/Organisation';
+import OrganisationDashboard from './Components/OrganisationDashboard';
+import AddServiceProvider from './Components/AddServiceProvider';
+import OrganisationProfile from './Components/OrganisationProfile';
 const App = () => {
   const location = useLocation();
-  const hideHeaderPaths = ['/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile'];
+  const hideHeaderPaths = ['/org/profile','/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile','/org','/org/dashboard','/org/addService'];
   return (
     <>
       {!hideHeaderPaths.includes(location.pathname) && <Header />}
@@ -44,6 +47,10 @@ const App = () => {
         <Route path="/admin/addOrg" element = {<AddOrganizationComponent/>}/>
         <Route path="/admin/dashboard" element = {<Dashboard/>}/>
         <Route path="/admin/profile" element = {<Profile/>}/>
+        <Route path="/org" element={<Organisation/>}/>
+        <Route path="/org/dashboard" element = {<OrganisationDashboard/>}/>
+        <Route path = "/org/addService" element = {<AddServiceProvider/>}/>
+        <Route path = "/org/profile" element = {<OrganisationProfile/>}/>
       </Routes>
       <ToastContainer />
     </>

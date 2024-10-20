@@ -11,6 +11,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const recData = location.state?.data;
+  console.log(recData);
   useEffect(() => {
     if (recData) {
       toast.success("Verification successful");
@@ -37,12 +38,16 @@ function Login() {
     .then(response => {
       if (response && response.data) {
         console.log(response.data);
-        const { token, name, email, role } = response.data;
+        const { token, name, email, role ,id} = response.data;
 
         localStorage.setItem("token", token);
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
         localStorage.setItem("role", role);
+        if(id)
+        {
+          localStorage.setItem("id",id);
+        }
         
         const roleActions = {
             user: () => {
@@ -57,7 +62,7 @@ function Login() {
             },
             organisation: () => {
                 //console.log("Logged in as organisation");
-                navigate("/organisationDashboard");
+                navigate("/org");
                 toast.success(`Welcome, ${name}`);
             },
             serviceProvider: () => {

@@ -67,16 +67,24 @@ const getServiceProvider = async(req,res)=>
 };
 const getByOrgId = async (req, res) => {
     try {
-        const allServiceProviders = await serviceProviderModel.find({ organisationId: req.body.organisationId });
-        if (allServiceProviders.length > 0) {
-            res.status(200).json(allServiceProviders);
-        } else {
-            res.status(404).json({ msg: 'No service providers found for this organization.' });
-        }
+
+      const organisationId = req.body.organisationId; 
+      console.log(organisationId);
+      const allServiceProviders = await serviceProviderModel.find({ organisationId });
+      //console.log(allServiceProviders);
+  
+      if (allServiceProviders.length > 0) {
+        res.status(200).json(allServiceProviders);
+      } else {
+        res.status(404).json({ msg: 'No service providers found for this organization.' });
+      }
     } catch (err) {
-        res.status(500).json({ msg: 'Unable to fetch service providers.' });
+      res.status(500).json({ msg: 'Unable to fetch service providers.', error: err.message });
     }
-};
+  };
+  
+
+
 
 const saveServiceProvider = async(req,res)=>
 {

@@ -71,7 +71,7 @@ const checkUser = async (req, res) => {
                     `;                                   
                 const subject = "Successful Login to TipEase: Welcome Back!";
                 sendMail(email,subject,html);
-                res.status(200).json({ token , role : user.role , email : user.email , name : user.name });
+                res.status(200).json({ token , role : user.role , email : user.email , name : user.name ,id : user.id});
                 }
                 else
                     res.status(404).send(false);

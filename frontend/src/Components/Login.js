@@ -67,7 +67,7 @@ function Login() {
             },
             serviceProvider: () => {
               //console.log("Logged in as service provider");
-              navigate("/serviceproviderDashboard");
+              navigate("/service");
               toast.success(`Welcome, ${name}`);
             },
             default: () => {

@@ -168,5 +168,4 @@ const AdminBody = () => {
     </div>
   );
 };
-
 export default AdminBody;

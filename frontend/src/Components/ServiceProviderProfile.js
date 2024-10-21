@@ -24,9 +24,11 @@ const ServiceProviderProfile = () => {
 
   const fetchServiceProviderData = async () => {
     try {
-      const organisationId = localStorage.getItem("id");
-      const response = await axios.post('http://localhost:4000/serviceProvider/byOrg', { organisationId });
-      const { _id, password, ...rest } = response.data[0];
+      const id = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+      const response = await axios.post('http://localhost:4000/serviceProvider', { id }      ,
+        { headers: { Authorization: `Bearer ${token}` } });
+      const {__v ,qrCode,_id, password, ...rest } = response.data[0];
       setFormData(rest);
     } catch (error) {
       toast.error("Failed to fetch service provider data");

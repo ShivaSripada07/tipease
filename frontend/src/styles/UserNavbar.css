@@ -1,0 +1,153 @@
+/* Updated UserNavbar Styles with Unique Class Names */
+.user-navbar-custom {
+    background-color: #1d2a35;
+    color: white;
+    padding: 1rem;
+}
+.user-nav-link-custom i {
+    margin-right: 6px; /* Adjust the space as needed */
+  }
+.user-container-custom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-logo-custom {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.user-menu-icon-custom {
+    margin-right: 0.5rem;
+}
+
+.user-nav-links-custom {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-nav-link-custom {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.user-nav-link-custom:hover {
+    background-color: transparent;
+    color: #05aa6d;
+    border-radius: 14px;
+}
+
+.user-nav-link-icon-custom {
+    margin-right: 0.5rem;
+}
+
+.user-welcome-message-custom {
+    font-size: 1.3rem;
+}
+
+/* Modal for QR Reader */
+.qr-reader-modal-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeInCustom 0.3s ease-out;
+}
+
+.qr-reader-container-custom {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    position: relative;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-qr-reader-custom {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #1d2a35;
+}
+
+#qr-reader-custom {
+    width: 100% !important;
+}
+
+#qr-reader__scan_region-custom {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#qr-reader__dashboard_section_csr-custom button {
+    background-color: #05aa6d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#qr-reader__dashboard_section_csr-custom button:hover {
+    background-color: #048f5b;
+}
+
+@keyframes fadeInCustom {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .user-container-custom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-nav-links-custom {
+        margin-top: 1rem;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .user-nav-link-custom {
+        padding: 0.5rem 0;
+    }
+
+    .user-welcome-message-custom {
+        margin-top: 1rem;
+    }
+}

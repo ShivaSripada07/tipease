@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation ,matchPath } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import HomeComponent from './HomeComponent';
@@ -29,12 +29,20 @@ import ServiceProvider from './Components/ServiceProvider';
 import ServiceProviderDashboard from './Components/serviceProviderDashboard';
 import ServiceProviderHelp from './Components/ServiceProviderHelp';
 import ServiceProviderProfile from './Components/ServiceProviderProfile';
+import UserDashboard from './Components/UserDashboard';
+import HowWork from './Components/HowWork';
+import UserResource from './Components/UserResource';
+import UserProfile from './Components/UserProfile';
+import PayTip from './Components/PayTip';
+import ServiceProviderQR from './Components/ServiceProviderQR';
 const App = () => {
   const location = useLocation();
-  const hideHeaderPaths = ['/service/profile','/service/help','/service/dashboard','/service','/org/profile','/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile','/org','/org/dashboard','/org/addService'];
+  const hideHeaderPaths = ['/service/qr','/paytip/:serviceId','/user/profile','/user/resource','/user/how','/user','/service/profile','/service/help','/service/dashboard','/service','/org/profile','/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile','/org','/org/dashboard','/org/addService'];
+  const shouldHideHeader = hideHeaderPaths.includes(location.pathname) ||
+  matchPath('/paytip/:serviceId', location.pathname);
   return (
     <>
-      {!hideHeaderPaths.includes(location.pathname) && <Header />}
+      {!shouldHideHeader && <Header />}
       <Routes>
         <Route path="/" exact index element={<HomeComponent />} />
         <Route path="/work" element={<Work />} />
@@ -59,6 +67,12 @@ const App = () => {
         <Route path = "/service/dashboard" element = {<ServiceProviderDashboard/>}/>
         <Route path = "/service/help" element = {<ServiceProviderHelp/>}/>
         <Route path = "/service/profile" element = {<ServiceProviderProfile/>}/>
+        <Route path = "/user" element = {<UserDashboard/>}/>
+        <Route path = "/user/how" element = {<HowWork/>}/>
+        <Route path = "/user/resource" element = {<UserResource/>}/>
+        <Route path = "/user/profile" element = {<UserProfile/>}/>
+        <Route path = "/paytip/:serviceId" element = {<PayTip/>}/>
+        <Route path = "/service/qr" element = {<ServiceProviderQR/>}/>
       </Routes>
       <ToastContainer />
     </>

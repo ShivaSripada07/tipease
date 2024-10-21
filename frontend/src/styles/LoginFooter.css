@@ -1,0 +1,114 @@
+.login-footer {
+    background-color: #1d2a35;
+    color: white;
+    padding: 2rem 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.login-footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.login-footer-left {
+    flex: 1;
+    padding-right: 2rem;
+}
+
+.login-footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.login-footer-left p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-footer-right {
+    display: flex;
+    flex: 1;
+}
+
+.login-footer-column {
+    flex: 1;
+}
+
+.login-footer-column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.login-footer-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.login-footer-column li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.login-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.login-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-social-icons svg {
+    cursor: pointer;
+}
+
+.login-app-stores, .login-payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-app-stores img, .login-payment-methods img {
+    height: 30px;
+}
+
+.login-copyright {
+    font-size: 0.8rem;
+}
+
+.login-copyright a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.login-copyright a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-footer-content {
+        flex-direction: column;
+    }
+
+    .login-footer-left, .login-footer-right {
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .login-footer-right {
+        flex-direction: column;
+    }
+
+    .login-footer-column {
+        margin-bottom: 1rem;
+    }
+}

@@ -1,199 +1,162 @@
 const serviceProviderModel = require('../Model/serviceProvider.model');
 const loginModel = require('../Model/login.model');
-/*
-    name :{
-        type : String,
-        required : true,
-    },
-    email :
-    {
-        type : String,
-        required : true,
-        unique : true
-    },
-    password :
-    {
-        type : String,
-        required : true
-    },
-    mobileNumber :
-    {
-        type : Number,
-        required : true,
-        unique : true
-    },
-    serviceId :
-    {
-        type : Number,
-        required : true,
-        unique : true
-    },
-    imageUrl : 
-    {
-        type : String,
-        required : true
-    },
-    bankDetails :
-    {
-        type : String,
-        required : true,
-        unique : true
-    },
-    role :
-    {
-        type : String , 
-        required : true
-    }
+const QRCode = require('qrcode');
 
-*/
-const getServiceProvider = async(req,res)=>
-{
-    try
-    {
-        const allServiceProviders = await serviceProviderModel.find({});
-        if(allServiceProviders)
-        {
-            res.status(200).json(allServiceProviders);
-        }
-        else
-        {
-            res.status(404).json({msg:'error in fetching'});
-        }
-    }
-    catch(err)
-    {
-        res,status(500).json({msg:'unable to fetch'});
+const generateQRCode = async (serviceId) => {
+    try {
+        const url = `http://localhost:3000/paytip/${serviceId}`;
+        const qrCode = await QRCode.toDataURL(url);
+        return qrCode;
+    } catch (err) {
+        console.error('Error generating QR code:', err);
+        throw err;
     }
 };
+const getServiceProvider = async (req, res) => {
+    try {
+        const allServiceProviders = await serviceProviderModel.find({});
+        if (allServiceProviders) {
+            res.status(200).json(allServiceProviders);
+        } else {
+            res.status(404).json({ msg: 'error in fetching' });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: 'unable to fetch' });
+    }
+};
+
 const getByOrgId = async (req, res) => {
     try {
+        const organisationId = req.body.organisationId;
+        const allServiceProviders = await serviceProviderModel.find({ organisationId });
 
-      const organisationId = req.body.organisationId; 
-      console.log(organisationId);
-      const allServiceProviders = await serviceProviderModel.find({ organisationId });
-      //console.log(allServiceProviders);
-  
-      if (allServiceProviders.length > 0) {
-        res.status(200).json(allServiceProviders);
-      } else {
-        res.status(404).json({ msg: 'No service providers found for this organization.' });
-      }
+        if (allServiceProviders.length > 0) {
+            res.status(200).json(allServiceProviders);
+        } else {
+            res.status(404).json({ msg: 'No service providers found for this organization.' });
+        }
     } catch (err) {
-      res.status(500).json({ msg: 'Unable to fetch service providers.', error: err.message });
+        res.status(500).json({ msg: 'Unable to fetch service providers.', error: err.message });
     }
-  };
-  
+};
 
-
-
-const saveServiceProvider = async(req,res)=>
-{
-    try
-    {
+const saveServiceProvider = async (req, res) => {
+    try {
         const newServiceProvider = req.body;
-        if(newServiceProvider)
-        {
-            const {name,email,password,mobileNumber,serviceId,imageUrl,bankDetails,role} = newServiceProvider;
+        if (newServiceProvider) {
+            const { name, email, password, mobileNumber, serviceId, imageUrl, bankDetails, role, organisationId } = newServiceProvider;
+
+            const qrCode = await generateQRCode(serviceId);
 
             const newSP = serviceProviderModel.create({
-                name:name,
-                email:email,
-                password:password,
-                mobileNumber:mobileNumber,
-                serviceId : serviceId,
-                imageUrl : imageUrl,
-                bankDetails : bankDetails,
-                role : role
+                name,
+                email,
+                password,
+                mobileNumber,
+                serviceId,
+                imageUrl,
+                bankDetails,
+                role,
+                organisationId,
+                qrCode
             });
-            await loginModel.create({
-                email:email,
-                password : password,
-                role : "service provider",
-                name:name
-            });
-            newSP.then((ob)=>
-            {
+            const id = serviceId;
+            try {
+                const newLogin = await loginModel.create({
+                    id ,
+                    email,
+                    password,
+                    role: "serviceProvider",
+                    name,
+                });
+            } catch (error) {
+            }
+            newSP.then((ob) => {
                 res.status(201).json(ob);
+            }).catch((err) => {
+                res.status(500).json({ error: `${err}` });
             });
-            newSP.catch((err)=>
-            {
-                res.status(500).json({error:`${err}`});
-            });
+        } else {
+            res.status(404).json({ msg: 'all details required' });
         }
-        else
-        {
-            res.status(404).json({msg:'all details required'});
+    } catch (err) {
+        res.status(500).json({ msg: 'error occurred', error: err.message });
+    }
+};
+
+const deleteServiceProvider = async (req, res) => {
+    try {
+        const { name } = req.body;
+        const delObj = await serviceProviderModel.findOneAndDelete({ name });
+
+        if (delObj) {
+            res.status(200).json({ msg: 'success' });
+        } else {
+            res.status(404).json({ msg: 'error' });
         }
+    } catch (err) {
+        res.status(500).json({ msg: 'error' });
     }
-    catch(err)
-    {
-        res.status(500).json({msg:'error occured'});
-    }
-        
 };
-const deleteServiceProvider = async(req,res)=>
-{
-       try
-       {
-            const {name} = req.body;
-            const delObj = await serviceProviderModel.findOneAndDelete({name});
 
-            if(delObj)
-            {
-                res.status(200).json({msg:'success'});
-            }
-            else
-            {
-                res.status(404).json({msg:'error'});
-            }
-       }
-       catch(err)
-       {
-            res.status(500).json({msg:'error'});
-       }     
-};
-const updateServiceProvider = async(req,res)=>
-{
-
-    try
-    {
+const updateServiceProvider = async (req, res) => {
+    try {
         const updatedServiceProviderDetails = req.body;
-        //console.log(updatedServiceProviderDetails);
-        const updatedDetails = await serviceProviderModel.findOneAndUpdate({serviceId:updatedServiceProviderDetails.serviceId},updatedServiceProviderDetails);
-        if(updatedDetails)
-        {
-            res.status(200).json({msg:'success'});
+        const updatedDetails = await serviceProviderModel.findOneAndUpdate(
+            { serviceId: updatedServiceProviderDetails.serviceId },
+            updatedServiceProviderDetails,
+            { new: true }
+        );
+
+        if (updatedDetails) {
+            res.status(200).json({ msg: 'success', updatedDetails });
+        } else {
+            res.status(404).json({ msg: 'not found' });
         }
-        else
-        {
-            res.status(404).json({msg:'not found'});
-        }        
+    } catch (err) {
+        res.status(500).json({ msg: 'error', error: err.message });
     }
-    catch(err)
-    {
-        res.status(500).json({msg:'error'});
-    }
-                
 };
-const getBySearch = async(req,res)=>
-{
-    try
-    {
+
+const getBySearch = async (req, res) => {
+    try {
         const name = req.body.username;
         const matchres = await serviceProviderModel.find({ username: { $regex: '^' + name + '.*', $options: 'i' } });
-        if(matchres)
-        {
+        if (matchres) {
             res.status(200).json(matchres);
+        } else {
+            res.status(404).json({ msg: 'no match found' });
         }
-        else
-        {
-            res.status(404).json({msg:'no match found'});
-        }
+    } catch (err) {
+        res.status(500).json({ msg: 'error' });
     }
-    catch(err)
-    {
-        res.status(500).json({msg:'error'});
-    }
-
 };
-module.exports = {getServiceProvider,saveServiceProvider,updateServiceProvider,deleteServiceProvider,getBySearch , getByOrgId};
+
+const getSPById = async (req, res) => {
+    try {
+        const Id = req.body.id;
+        const allServiceProviders = await serviceProviderModel.find({ serviceId: Id });
+        if (allServiceProviders.length > 0) {
+            res.status(200).json(allServiceProviders);
+        } else {
+            res.status(404).json({ msg: 'No service providers found for this organization.' });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: 'Unable to fetch service providers.', error: err.message });
+    }
+};
+const getSPByName = async (req, res) => {
+    try {
+        const Id = req.body.name;
+        const allServiceProviders = await serviceProviderModel.find({ name: Id });
+        if (allServiceProviders.length > 0) {
+            res.status(200).json(allServiceProviders);
+        } else {
+            res.status(404).json({ msg: 'No service providers found for this organization.' });
+        }
+    } catch (err) {
+        res.status(500).json({ msg: 'Unable to fetch service providers.', error: err.message });
+    }
+};
+
+module.exports = { getSPByName,getSPById, getServiceProvider, saveServiceProvider, updateServiceProvider, deleteServiceProvider, getBySearch, getByOrgId };

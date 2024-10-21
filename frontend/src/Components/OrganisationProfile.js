@@ -1,111 +1,141 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Star, DollarSign, MapPin, Phone, Building } from 'lucide-react';
+import "../styles/PayTip.css"
 import axios from 'axios';
-import { Save, ArrowLeft } from 'lucide-react';
-import { toast } from 'react-toastify';
-import "../styles/OrganisationProfile.css"
-const OrganisationProfile = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    role: '',
-    organisationId: '',
-    organisationName: '',
-    location: '',
-    mobileNumber: '',
-    imageUrl: ''
-  });
+
+function PayTip() {
+  const { serviceId } = useParams();
+  const [provider, setProvider] = useState(null);
+  const [organization, setOrganization] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [tipAmount, setTipAmount] = useState(5);
+  const [userRating, setUserRating] = useState(0);
 
   useEffect(() => {
-    fetchOrganisationData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const providerResponse = await axios.post(
+          'http://localhost:4000/serviceProvider',
+          { id: serviceId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        
+        if (!providerResponse.data[0]) {
+          throw new Error('Failed to fetch service provider data');
+        }
+        
+        const providerData = providerResponse.data[0];
+        setProvider(providerData);
 
-  const fetchOrganisationData = async () => {
-    try {
-      const id = localStorage.getItem("id");
-      const response = await axios.post('http://localhost:4000/organisation/byorg', {id});
-      const { _id, ...rest } = response.data[0];
-      setFormData(rest); 
-    } catch (error) {
-      toast.error("Failed to fetch organisation data");
-      console.error('Error fetching organisation data:', error);
-    }
+        const orgResponse = await axios.post(
+          'http://localhost:4000/organisation/byorg',
+          { id: providerData.organisationId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (!orgResponse.data) {
+          throw new Error('Failed to fetch organization data');
+        }
+
+        setOrganization(orgResponse.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [serviceId]);
+
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!provider || !organization) return <div className="error">No data found</div>;
+
+  const handleTipChange = (amount) => {
+    setTipAmount(amount);
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handlePayTip = () => {
+    console.log(`Paying $${tipAmount} tip to ${provider.name}`);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem("token");
-      const id = localStorage.getItem("id"); // Get the id from localStorage
-      const updatedFormData = {
-        ...formData,
-        id 
-      };
-      await axios.patch('http://localhost:4000/organisation/edit', updatedFormData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      toast.success("Organisation updated successfully");
-    } catch (error) {
-      toast.error("Failed to update organisation");
-      console.error('Error updating organisation:', error);
-    }
+  const handleRating = (rating) => {
+    setUserRating(rating);
   };
 
   return (
-    <div className="org-profile-container">
-      <div className="org-profile-form-card">
-        <div className="org-profile-form-header">
-          <h2 className="org-profile-form-title">Organisation Profile</h2>
+    <div className="paytip-container">
+      <h1 className="site-title">TipEase</h1>
+      <div className="paytip-card">
+        <div className="provider-image">
+          <img src={provider.imageUrl} alt={provider.name} />
         </div>
-        <form onSubmit={handleSubmit} className="org-profile-profile-form">
-          <div className="org-profile-image-preview">
-            <img src={formData.imageUrl} alt="Organisation" className="org-profile-org-image" />
+        <div className="provider-info">
+          <h2>{provider.name}</h2>
+          <div className="rating">
+            {[...Array(5)].map((_, index) => (
+              <Star
+                key={index}
+                className={index < Math.round(provider.rating) ? 'filled' : ''}
+                onClick={() => handleRating(index + 1)}
+              />
+            ))}
+            <span className="rating-text">{provider.rating ? provider.rating.toFixed(1) : 'N/A'}</span>
           </div>
-          {Object.entries(formData).map(([key, value]) => (
-            key !== 'imageUrl' && (
-              <div key={key} className="org-profile-form-group">
-                <label htmlFor={key} className="org-profile-form-label">
-                  {key.replace(/([A-Z])/g, ' $1').trim()}:
-                </label>
-                <input
-                  type={key === 'email' ? 'email' : key === 'mobileNumber' || key === 'organisationId' ? 'number' : 'text'}
-                  id={key}
-                  name={key}
-                  value={value}
-                  onChange={handleChange}
-                  disabled={key === 'email' || key === 'role' || key === 'organisationId'}
-                  className="org-profile-form-input"
-                />
-              </div>
-            )
+          <p className="service-message">
+            Hello, I'm {provider.name}. Thank you for allowing me to serve you today. Your generosity is greatly appreciated and helps support my passion for excellent service.
+          </p>
+          <div className="org-details">
+            <p><Building size={16} /> {organization.organisationName}</p>
+            <p><MapPin size={16} /> {organization.location}</p>
+            <p><Phone size={16} /> {organization.mobileNumber}</p>
+          </div>
+          <p className="service-id">Service ID: {provider.serviceId}</p>
+        </div>
+      </div>
+      <div className="tip-section">
+        <h3>Choose Your Tip Amount</h3>
+        <div className="tip-buttons">
+          {[5, 10, 15, 20].map((amount) => (
+            <button
+              key={amount}
+              className={`tip-button ${tipAmount === amount ? 'active' : ''}`}
+              onClick={() => handleTipChange(amount)}
+            >
+              ${amount}
+            </button>
           ))}
-          <div className="org-profile-form-actions">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="org-profile-back-btn"
-            >
-              <ArrowLeft className="org-profile-btn-icon" />
-              Back
-            </button>
-            <button
-              type="submit"
-              className="org-profile-save-btn"
-            >
-              <Save className="org-profile-btn-icon" />
-              Save Changes
-            </button>
-          </div>
-        </form>
+          <input
+            type="tel"
+            value={tipAmount}
+            onChange={(e) => setTipAmount(Math.max(0, parseInt(e.target.value) || 0))}
+            className="custom-tip"
+            placeholder="Custom"
+          />
+        </div>
+        <button className="pay-button" onClick={handlePayTip}>
+          <DollarSign size={20} />
+          Pay Tip
+        </button>
+      </div>
+      <div className="user-rating-section">
+        <h3>Rate Your Experience</h3>
+        <div className="user-rating">
+          {[...Array(5)].map((_, index) => (
+            <Star
+              key={index}
+              className={index < userRating ? 'filled' : ''}
+              onClick={() => handleRating(index + 1)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default OrganisationProfile;
+export default PayTip;

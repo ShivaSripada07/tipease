@@ -1,5 +1,6 @@
 const userModel = require('../Model/user.model');
 const loginModel = require('../Model/login.model');
+const { response } = require('express');
 const getUsers = async(req,res)=>
 {
     try
@@ -37,7 +38,6 @@ const saveUsers = async(req, res) => {
         });
         return res.status(201).json({ msg: 'User and login created successfully' });
     } catch (err) {
-        console.error("Error creating user or login:", err);
         return res.status(500).json({ msg: 'Error creating user or login', error: err.message });
     }
 };
@@ -105,4 +105,20 @@ const getBySearch = async(req,res)=>
         res.status(500).json({msg:'error'});
     }
 };
-module.exports = {getUsers,saveUsers,deleteUsers,updateUsers,getBySearch};
+const getByName = async (req, res) => {
+    try {
+        const name = req.headers.name; 
+        
+        userModel.find({ username: name })
+            .then(response => { 
+                res.status(200).json(response);
+            })
+            .catch(err => {
+                res.status(404).json({ 'msg': 'not found' });
+            });
+    } catch (err) {
+        res.status(500).json({ msg: 'error' });
+    }
+};
+
+module.exports = {getUsers,saveUsers,deleteUsers,updateUsers,getBySearch,getByName};

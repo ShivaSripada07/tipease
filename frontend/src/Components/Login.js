@@ -52,7 +52,7 @@ function Login() {
         const roleActions = {
             user: () => {
                 //console.log("Logged in as user");
-                navigate("/userDashboard");
+                navigate("/user");
                 toast.success(`Welcome, ${name}`);
             },
             admin: () => {

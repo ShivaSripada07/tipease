@@ -171,7 +171,7 @@ const getBySearch = async(req,res)=>
 const getOrgId = async (req, res) => {
     try {
       const organisationId = req.body.id; 
-      const response = await organisationModel.find({ organisationId });  
+      const response = await organisationModel.find({ organisationId : organisationId });  
       if (response.length > 0) {
         res.status(200).json(response);
       } else {

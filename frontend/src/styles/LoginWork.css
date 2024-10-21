@@ -1,0 +1,61 @@
+.login-work {
+    background-color: #f1e8d7;
+    color: #1d2a35;
+    padding: 4rem 0;
+}
+
+.login-work .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-content {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-work h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.login-work p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-cta-btn {
+    background-color: #05aa6d;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-image img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+    .login-work .login-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .login-content {
+        text-align: left;
+        width: 50%;
+        margin-bottom: 0;
+    }
+
+    .login-image {
+        width: 45%;
+    }
+}

@@ -1,0 +1,114 @@
+.sp-qr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2rem;
+  }
+  
+  .sp-qr-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .sp-qr-title {
+    color: #05aa6d;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sp-qr-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .sp-qr-info {
+    text-align: left;
+  }
+  
+  .sp-qr-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #05aa6d;
+    margin-bottom: 1rem;
+  }
+  
+  .sp-qr-info h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sp-qr-info p {
+    color: #666;
+    font-size: 1rem;
+  }
+  
+  .sp-qr-code-image {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.3s ease;
+  }
+  
+  .sp-qr-code-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .sp-qr-instructions {
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .sp-qr-main-text {
+    color: #05aa6d;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .sp-qr-instructions p {
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #05aa6d;
+    margin-top: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .sp-qr-content {
+      flex-direction: column;
+    }
+  
+    .sp-qr-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+  
+    .sp-qr-code-image {
+      width: 150px;
+      height: 150px;
+    }
+  }

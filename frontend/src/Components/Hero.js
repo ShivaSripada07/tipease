@@ -8,7 +8,7 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="container">
-        <div className="hero-content">
+        <div className="hero-content" style={{marginRight:'10rem'}}>
           <h2>TipEase is the best <span className="highlight">cashless tipping platform</span> for your business!</h2>
           <p>TipEase helps your team earn more tips and reduce costs for your business! Empower your team with TipEase and make tipping fair.</p>
           <button className="cta-btn" onClick={() => navigate('/signup')}>Sign up for free!</button>

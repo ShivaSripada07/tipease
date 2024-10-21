@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, HelpCircle, User, LogOut } from 'lucide-react';
+import { LayoutDashboard, HelpCircle, User, LogOut, QrCode } from 'lucide-react';
 import '../styles/ServiceProviderNavbar.css'
 
 const ServiceProviderNavbar = () => {
@@ -15,15 +15,21 @@ const ServiceProviderNavbar = () => {
   return (
     <nav className="sp-navbar">
       <div className="sp-navbar-container">
-        <Link to="/servicer" className="sp-logo">
-          <span className="sp-menu-icon"> ☰ </span>
-            TipEase
+        <Link to="/service" className="sp-logo" style={{fontSize:'2rem'}}>
+          <span className="sp-menu-icon">☰</span>
+          TipEase
         </Link>
         <ul className="sp-nav-links">
           <li>
             <Link to="/service/dashboard" className="sp-nav-link">
               <LayoutDashboard size={20} />
               <span>Dashboard</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/service/qr" className="sp-nav-link">
+              <QrCode size={20} />
+              <span>QR Code</span>
             </Link>
           </li>
           <li>

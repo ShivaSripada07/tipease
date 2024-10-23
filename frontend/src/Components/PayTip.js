@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Star, IndianRupee, MapPin, Phone, Building } from 'lucide-react';
 import "../styles/PayTip.css"
 import axios from 'axios';
+import QRCode from 'react-qr-code';
 
 function PayTip() {
   const { serviceId } = useParams();
@@ -12,6 +13,9 @@ function PayTip() {
   const [tipAmount, setTipAmount] = useState(10);
   const [userRating, setUserRating] = useState(0);
   const [serviceRating,setServiceRating] = useState(0);
+  const [showQRCode, setShowQRCode] = useState(false);
+  
+
   useEffect(() => {
     const fetchServiceProvider = async () => {
       try {
@@ -57,11 +61,24 @@ function PayTip() {
   const handleCustomTipChange = (e) => {
     setTipAmount(Math.max(0, parseInt(e.target.value) || 0));
   };
+  const upiLink = `upi://pay?pa=${provider.bankdetails}&pn=${provider.name}&am=${tipAmount}&cu=INR`;
+  
 
   const handlePayTip = () => {
     console.log(`Paying ₹${tipAmount} tip to ${provider.name}`);
-    // Implement actual payment logic here
-  };
+    
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Mobile: Open UPI app directly
+        window.location.href = upiLink;
+        console.log(`Paying ₹${tipAmount} tip to ${provider.name} from mobile `);
+    } else {
+      setShowQRCode(true);
+      
+    }
+};
 
   const handleRating = (rating) => {
     setUserRating(rating);
@@ -72,6 +89,8 @@ function PayTip() {
   {
     setServiceRating(rating);
   };
+
+  
 
   return (
     <div className="paytip-container">
@@ -104,6 +123,7 @@ function PayTip() {
         </div>
       </div>
       <div className="tip-section">
+        <div className={` ${showQRCode ? "hidden":"" }`}>
         <h3>Choose Your Tip Amount</h3>
         <div className="tip-buttons">
           {[10, 15, 20, 25].map((amount) => (
@@ -130,7 +150,22 @@ function PayTip() {
           <IndianRupee size={20} />
           Pay Tip
         </button>
-      </div>
+        </div>
+        {showQRCode && (
+                <div className="mt-4 flex flex-col items-center">
+                    <h2>Scan the QR Code to Pay</h2>
+                    <div style={{ height: "auto", margin: "0 auto", width: "100%" }}>
+  <QRCode
+    size={256}
+    style={{ maxWidth: "100%", width: "100%" }}
+    value={upiLink}
+    viewBox={`0 0 256 256`}
+  />
+</div>
+                </div>
+            )}
+        
+        </div>
       <div className="user-rating-section">
         <h3>Rate Your Experience</h3>
         <div className="user-rating">

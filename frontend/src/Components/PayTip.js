@@ -28,17 +28,15 @@ function PayTip() {
         if (!response.data[0]) {
           throw new Error('Failed to fetch service provider data');
         }
+        console.log(response.data[0].bankDetails);
         const data = response.data[0]; 
-        console.log(data.organisationId);  
         const orgResponse = await axios.post(
           'http://localhost:4000/organisation/byorg',
           { id: data.organisationId }  
         );
-        console.log(orgResponse);
         data.organisationName = orgResponse.data[0].organisationName;
         data.location = orgResponse.data[0].location;
         data.mobileNumber = orgResponse.data[0].mobileNumber;
-        console.log(data)
         setProvider(data);
         setLoading(false);
       } catch (err) {
@@ -61,10 +59,11 @@ function PayTip() {
   const handleCustomTipChange = (e) => {
     setTipAmount(Math.max(0, parseInt(e.target.value) || 0));
   };
-  const upiLink = `upi://pay?pa=${provider.bankdetails}&pn=${provider.name}&am=${tipAmount}&cu=INR`;
+  const upiLink = `upi://pay?pa=${provider.bankDetails}&pn=${provider.name}&am=${tipAmount}&cu=INR`;
   
 
   const handlePayTip = () => {
+    console.log(upiLink);
     console.log(`Paying ₹${tipAmount} tip to ${provider.name}`);
     
 
@@ -75,8 +74,7 @@ function PayTip() {
         window.location.href = upiLink;
         console.log(`Paying ₹${tipAmount} tip to ${provider.name} from mobile `);
     } else {
-      setShowQRCode(true);
-      
+      setShowQRCode(true); 
     }
 };
 

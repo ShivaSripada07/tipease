@@ -77,7 +77,7 @@ const AdminBody = () => {
   };
   const handleServiceEdit = (provider)=>
   {
-    navigate('/admin/serviceEdit', { state: { data: provider, reloc: '/org' } });
+    navigate('/admin/serviceEdit', { state: { data: provider, reloc: '/admin' } });
   };
   const handleServiceDelete = async(provider)=>
   {

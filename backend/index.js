@@ -24,7 +24,7 @@ const PORT  = process.env.PORT;
 
 //database connection 
 const {connectMongoDB} = require('./Connection/connection.db');
-const url = "mongodb+srv://shivasripada04:tipease@tipease.pzlei.mongodb.net/tipease";
+const url =process.env.urlDB;
 connectMongoDB(url);
 
 

@@ -296,7 +296,7 @@ function Signup() {
           {formData.role === 'serviceProvider' && (
             <div>
               <label htmlFor="bank-details" className="sr-only">
-                Bank Details
+                UPI ID
               </label>
               <input
                 id="bank-details"
@@ -304,7 +304,7 @@ function Signup() {
                 type="text"
                 required
                 className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-tipease-primary focus:border-tipease-primary focus:z-10 sm:text-sm"
-                placeholder="Bank Details"
+                placeholder="UPI ID"
                 value={formData.bankDetails}
                 onChange={handleInputChange}
               />

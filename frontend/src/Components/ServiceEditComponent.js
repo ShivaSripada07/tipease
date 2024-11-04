@@ -48,7 +48,7 @@ const ServiceEditComponent = () => {
       });
       
       toast.success("Service provider updated successfully");
-      navigate('/admin');
+      navigate('/org');
       
     } catch (error) {
       toast.error("Failed to update service provider details");

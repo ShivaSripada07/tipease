@@ -153,7 +153,7 @@ const getBySearch = async(req,res)=>
     try
     {
         const name = req.body.username;
-        const matchres = await organisationModel.find({ username: { $regex: '^' + name + '.*', $options: 'i' } });
+        const matchres = await organisationModel.find({ organisationName: { $regex: '^' + name + '.*', $options: 'i' } });
         if(matchres)
         {
             res.status(200).json(matchres);

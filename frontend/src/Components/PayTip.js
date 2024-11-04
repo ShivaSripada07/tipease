@@ -4,7 +4,6 @@ import { Star, IndianRupee, MapPin, Phone, Building } from 'lucide-react';
 import "../styles/PayTip.css"
 import axios from 'axios';
 import QRCode from 'react-qr-code';
-
 function PayTip() {
   const { serviceId } = useParams();
   const [provider, setProvider] = useState(null);
@@ -14,8 +13,6 @@ function PayTip() {
   const [userRating, setUserRating] = useState(0);
   const [serviceRating,setServiceRating] = useState(0);
   const [showQRCode, setShowQRCode] = useState(false);
-  
-
   useEffect(() => {
     const fetchServiceProvider = async () => {
       try {

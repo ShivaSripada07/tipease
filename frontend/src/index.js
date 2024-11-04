@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation ,matchPath } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, matchPath } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import HomeComponent from './HomeComponent';
@@ -35,15 +35,19 @@ import UserResource from './Components/UserResource';
 import UserProfile from './Components/UserProfile';
 import PayTip from './Components/PayTip';
 import ServiceProviderQR from './Components/ServiceProviderQR';
+import PrivateRoute from './PrivateRoute';
+
 const App = () => {
   const location = useLocation();
   const hideHeaderPaths = ['/service/qr','/paytip/:serviceId','/user/profile','/user/resource','/user/how','/user','/service/profile','/service/help','/service/dashboard','/service','/org/profile','/admin', '/admin/edit', '/admin/addOrg', '/admin/dashboard', '/admin/profile','/org','/org/dashboard','/org/addService'];
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname) ||
-  matchPath('/paytip/:serviceId', location.pathname);
+    matchPath('/paytip/:serviceId', location.pathname);
+
   return (
     <>
       {!shouldHideHeader && <Header />}
       <Routes>
+        {/* Public Routes */}
         <Route path="/" exact index element={<HomeComponent />} />
         <Route path="/work" element={<Work />} />
         <Route path="/forwhat" element={<What />} />
@@ -53,26 +57,37 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify" element={<Verification />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/edit" element = {<AdminEditComponent/>}/>
-        <Route path="/admin/serviceEdit" element = {<ServiceEditComponent/>}/>
-        <Route path="/admin/addOrg" element = {<AddOrganizationComponent/>}/>
-        <Route path="/admin/dashboard" element = {<Dashboard/>}/>
-        <Route path="/admin/profile" element = {<Profile/>}/>
-        <Route path="/org" element={<Organisation/>}/>
-        <Route path="/org/dashboard" element = {<OrganisationDashboard/>}/>
-        <Route path = "/org/addService" element = {<AddServiceProvider/>}/>
-        <Route path = "/org/profile" element = {<OrganisationProfile/>}/>
-        <Route path = "/service" element = {<ServiceProvider/>}/>
-        <Route path = "/service/dashboard" element = {<ServiceProviderDashboard/>}/>
-        <Route path = "/service/help" element = {<ServiceProviderHelp/>}/>
-        <Route path = "/service/profile" element = {<ServiceProviderProfile/>}/>
-        <Route path = "/user" element = {<UserDashboard/>}/>
-        <Route path = "/user/how" element = {<HowWork/>}/>
-        <Route path = "/user/resource" element = {<UserResource/>}/>
-        <Route path = "/user/profile" element = {<UserProfile/>}/>
-        <Route path = "/paytip/:serviceId" element = {<PayTip/>}/>
-        <Route path = "/service/qr" element = {<ServiceProviderQR/>}/>
+
+        {/* Protected Routes */}
+        <Route element={<PrivateRoute />}>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/edit" element={<AdminEditComponent />} />
+          <Route path="/admin/serviceEdit" element={<ServiceEditComponent />} />
+          <Route path="/admin/addOrg" element={<AddOrganizationComponent />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/profile" element={<Profile />} />
+
+          {/* Organization Routes */}
+          <Route path="/org" element={<Organisation />} />
+          <Route path="/org/dashboard" element={<OrganisationDashboard />} />
+          <Route path="/org/addService" element={<AddServiceProvider />} />
+          <Route path="/org/profile" element={<OrganisationProfile />} />
+
+          {/* Service Provider Routes */}
+          <Route path="/service" element={<ServiceProvider />} />
+          <Route path="/service/dashboard" element={<ServiceProviderDashboard />} />
+          <Route path="/service/help" element={<ServiceProviderHelp />} />
+          <Route path="/service/profile" element={<ServiceProviderProfile />} />
+          <Route path="/service/qr" element={<ServiceProviderQR />} />
+
+          {/* User Routes */}
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/how" element={<HowWork />} />
+          <Route path="/user/resource" element={<UserResource />} />
+          <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/paytip/:serviceId" element={<PayTip />} />
+        </Route>
       </Routes>
       <ToastContainer />
     </>
@@ -86,7 +101,4 @@ root.render(
   </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
